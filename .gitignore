@@ -1,4 +1,5 @@
 venv/
+venv_cupid/
 core.Microsoft*
 core.mongo*
 core.python*
