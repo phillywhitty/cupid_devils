@@ -1,0 +1,1 @@
+web: gunicorn cupid_devils.wsgi
