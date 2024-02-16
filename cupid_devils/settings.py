@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-qoq-y27w(94z3i!6unif*#%z+mhp1z@2@wv1^su*#p#7brct0v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-phillywhitt-cupiddevils-9lgmd8h1cfu.ws-eu108.gitpod.io', '127.0.0.1']
+ALLOWED_HOSTS = [
+    '8000-phillywhitt-cupiddevils-9lgmd8h1cfu.ws-eu108.gitpod.io', '127.0.0.1']
 
 
 # Application definition
@@ -67,7 +68,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # required by allauth
+                'django.template.context_processors.request',  # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -147,6 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
