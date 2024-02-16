@@ -6,7 +6,6 @@ cloudinary==1.38.0
 defusedxml==0.7.1
 =======
 cloudinary==1.38.0
->>>>>>> 5cbbf5e4f9755be2709f301d43076d6a7d93f2cb
 dj-database-url==0.5.0
 Django==3.2.24
 django-allauth==0.41.0
