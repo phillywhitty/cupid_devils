@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid mt-5">
+
+    <div class="row">
+
+        <div class="col-lg-6 col-md-10 bg-white m-auto mb-5">
+
+            <div class="text-center">
+
+                <h2> <strong> <u>Love Stories</u></strong></h2>
+                <small><strong>Feel free to share a love story through our blogs! </strong></small>
+
+            </div>
+
+            <br><br>
+
+            <div class="row">
+                {% for blog in blog_list%}
+                <div class="col-lg-4">
+
+                    <div class="post-entry-1 border-bottom">
+
+                        <a href="#"><img src="{{blog.featured_image.url}}" alt="" class="img-fluid"></a>
+
+                        <div class="post-meta"><span class="date"></span> <span
+                                class="mx-1">&bullet;</span>
+                            <span>{{blog.created_on}}</span>
+                        </div>
+                        <h2 class="mb-2"><a href="single-post.html">{{blog.title}}</a>
+                        </h2>
+                        <span class="author mb-3 d-block">{{blog.author}}</span>
+                        <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
+                            temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+                <div class="text-center">
+                    <a href="" class="btn btn-lg bg-primary p-3 text-white">Share your love story here!</a>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

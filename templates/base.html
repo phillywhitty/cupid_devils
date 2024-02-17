@@ -5,14 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Cupid Devils</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="{% static 'img/favicon.png' %}" rel="icon">
-    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +27,11 @@
     <link href="{% static 'css/variables.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/95bc93f676.js" crossorigin="anonymous"></script>
+
+    <title>Cupid Devils</title>
+
 
 </head>
 
@@ -40,20 +39,19 @@
 <body>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    <header id="header" class="header d-flex align-items-center">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1>The Lovers Blog</h1>
+                <h1>The L<i class="fa-regular fa-heart"></i>vers Blog</h1>
             </a>
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="{% url 'post_blog' %}">Blog</a></li>
-                    <li><a href="single-post.html">Love Stories</a></li>
-                    <li><a href="about.html">Add Love Story</a></li>
+                    <li><a href="{% url 'blog_list' %}">Love Stories</a></li>
+                    <li><a href="{% url 'post_blog' %}">Add Love Story</a></li>
                     <li><a href="about.html">About Us</a></li>
                 </ul>
             </nav><!-- .navbar -->
