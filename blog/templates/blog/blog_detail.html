@@ -23,10 +23,10 @@
 
             <div class="col-lg-8">
                 <div>
-                    <a href="{{blog.featured_image.url}}"><img src="{{blog.featured_image}}" target="_blank" alt="" class="img-fluid"></a>
+                    <a href="{{blog.featured_image.url}}"><img src="{{blog.featured_image.url}}" target="_blank" alt="" class="img-fluid"></a>
                     <div class="post-meta"><span class="date"></span> <span class="mx-1">&bullet;</span>
                         <span>{{blog.created_on}}</span></div>
-                <h2 class="mb-2"><a href="{% url 'blog_details' %}">{{blog.title}}</a></h2>
+                <h2 class="mb-2"><a href="{% url 'blog_details' blog_id=blog.id  %}">{{blog.title}}</a></h2>
                     <span class="author mb-3 d-block">{{blog.author}}</span>
                     <p class="mb-4 d-block"> {{blog.content}}</p>
                 </div>
