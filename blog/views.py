@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views import generic
 from . forms import BlogForm
 from . models import Blog, Comment
@@ -15,7 +15,7 @@ def post_blog(request):
 
         if form.is_valid():
             form.save()
-        return redirect(reversed('home'))
+        return redirect(reverse('blog_list'))
     
     context = {
         'form': form
@@ -26,5 +26,5 @@ def post_blog(request):
 class BlogList(generic.ListView):
     model = Blog
     queryset = Blog.objects.filter(status=1).order_by("-created_on")
-    template_name = "index.html"
+    template_name = "blog_list.html"
     paginate_by = 6
