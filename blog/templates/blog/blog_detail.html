@@ -23,12 +23,32 @@
 
             <div class="col-lg-8">
                 <div>
+                    {% if "placeholder" in blog.featured_image.url %}
+                    <img src="https://res.cloudinary.com/dxajyjfpw/image/upload/v1708199980/pexels-monstera-production-5874742_qxkzt9.jpg" target="_blank" alt="" class="img-fluid">
+                    {% else %}
                     <a href="{{blog.featured_image.url}}"><img src="{{blog.featured_image.url}}" target="_blank" alt="" class="img-fluid"></a>
+                    {% endif %}
                     <div class="post-meta"><span class="date"></span> <span class="mx-1">&bullet;</span>
                         <span>{{blog.created_on}}</span></div>
                 <h2 class="mb-2"><a href="{% url 'blog_details' blog_id=blog.id  %}">{{blog.title}}</a></h2>
                     <span class="author mb-3 d-block">{{blog.author}}</span>
                     <p class="mb-4 d-block"> {{blog.content}}</p>
+                    {% if user.is_authenticated %}
+                            <form class="d-inline" action="{% url 'blog_like' blog_id=blog.id %}" method="POST">
+                                {% csrf_token %}
+                                {% if liked %}
+                                <button type="submit" name="blogpost_id" value="{{blog.id}}" class="btn-like">
+                                    <i class="fa-solid fa-heart"></i></button>
+                                {% else %}
+                                <button type="submit" name="blogpost_id" value="{{blog.id}}" class="btn-like">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                                {% endif %}
+                            </form>
+                            {% else %}
+                            <span class="text-secondary"><i class="far fa-heart"></i></span>
+                            {% endif %}
+                            <span class="text-secondary">{{ blog.number_of_likes }}</span>
                 </div>
             </div>
 

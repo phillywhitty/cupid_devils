@@ -27,7 +27,11 @@
 
                     <div class="post-entry-1 border-bottom">
 
+                        {% if "placeholder" in blog.featured_image.url %}
+                        <a href="#"><img src="https://res.cloudinary.com/dxajyjfpw/image/upload/v1708199980/pexels-monstera-production-5874742_qxkzt9.jpg" class="img-fluid"></a>
+                        {% else %}
                         <a href="#"><img src="{{blog.featured_image.url}}" alt="" class="img-fluid"></a>
+                        {% endif %}
 
                         <div class="post-meta"><span class="date"></span> <span class="mx-1">&bullet;</span>
                             <span>{{blog.created_on}}</span>
@@ -36,6 +40,7 @@
                         </h2>
                         <span class="author mb-3 d-block">{{blog.author}}</span>
                         <p class="mb-4 d-block">{{blog.excerpt}}</p>
+                        <p class="p-1"><i class="fa-solid fa-heart"></i>{{ blog.number_of_likes }}</p>
                         <a href="{% url 'blog_details' blog_id=blog.id  %}" class="btn btn-primary">Read More &rarr;</a>
                     </div>
 

@@ -70,12 +70,12 @@ def blog_details(request, blog_id):
 
 class BlogLike(LoginRequiredMixin, View):
 
-    def blog(self, request, slug):
-        blog = get_object_or_404(Blog, slug=slug)
+    def post(self, request, blog_id):
+        blog = get_object_or_404(Blog, pk=blog_id)
 
         if blog.likes.filter(id=request.user.id).exists():
             blog.likes.remove(request.user)
         else:
             blog.likes.add(request.user)
 
-        return HttpResponseRedirect(reverse('blog_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('blog_details', args=[blog_id]))
