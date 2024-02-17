@@ -28,3 +28,8 @@ class BlogList(generic.ListView):
     queryset = Blog.objects.filter(status=1).order_by("-created_on")
     template_name = "blog_list.html"
     paginate_by = 6
+
+
+class BlogDetail(generic.DetailView):
+    model = Blog
+    template_name = "blog_details.html"
