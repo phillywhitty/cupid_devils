@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect, reverse
-from django.views import generic
+from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.views import generic, View
+from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from . forms import BlogForm
 from . models import Blog, Comment
 
@@ -16,7 +18,7 @@ def post_blog(request):
         if form.is_valid():
             form.save()
         return redirect(reverse('blog_list'))
-    
+  
     context = {
         'form': form
     }
@@ -30,6 +32,34 @@ class BlogList(generic.ListView):
     paginate_by = 6
 
 
-class BlogDetail(generic.DetailView):
-    model = Blog
-    template_name = "blog_details.html"
+class BlogDetail(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        blog = get_object_or_404(Blog, slug=slug)
+        comments = blog.comments.filter(approved=True).order_by("-created_on")
+        liked = False
+        if blog.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        return render(
+            request,
+            "blog_detail.html",
+            {
+                "blog": blog,
+                "comments": comments,
+                "liked": liked
+            },
+        )
+
+
+class BlogLike(LoginRequiredMixin, View):
+
+    def blog(self, request, slug):
+        blog = get_object_or_404(Blog, slug=slug)
+
+        if blog.likes.filter(id=request.user.id).exists():
+            blog.likes.remove(request.user)
+        else:
+            blog.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('blog_detail', args=[slug]))
