@@ -35,9 +35,15 @@ class BlogList(generic.ListView):
 def blog_details(request, blog_id):
 
     blog = get_object_or_404(Blog, pk=blog_id)
+    liked = False
+    if blog.likes.filter(id=request.user.id).exists():
+        liked = True
+    comments = blog.comments.filter(approved=True).order_by("-created_on")
 
     context = {
-        'blogs': blog
+        'blog': blog,
+        'liked': liked,
+        'comments': comments
     }
 
     return render(request, 'blog/blog_detail.html', context)
