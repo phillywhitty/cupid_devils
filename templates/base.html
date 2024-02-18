@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -47,33 +47,38 @@
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1>The L<i class="fa-regular fa-heart fa-sm"></i>vers Blog</h1>
             </a>
-
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a href="{% url 'blog_list' %}">Love Stories</a></li>
-                    <li><a href="{% url 'post_blog' %}">Add Love Story</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav><!-- .navbar -->
-
-            <div class="position-relative">
-                <a href="https://github.com/phillywhitty/cupid_devils" target="_blank" class="m"><span class="bi-github"></span></a>
-                <a href="https://gb.linkedin.com/" class="mx-2" target="_blank"><span class="bi-linkedin"></span></a>
-                <a href="https://www.instagram.com/" class="mx-2" target="_blank"><span class="bi-instagram"></span></a>
-
-            </div>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                            <li class="nav-item">
+                                <a href="{% url 'blog_list' %}">Love Stories</a></li>
+                                <li class="nav-item">
+                                    <a href="{% url 'post_blog' %}">Add Love Story</a></li>
+                                <li class="nav-item">
+                                    <a href="about.html">About Us</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                            </li>
+                            {% endif %}
+        
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- .navbar -->
 
         </div>
 
@@ -133,6 +138,7 @@
                         <a href="#" class="instagram"><i class="bi bi-instagram p-1 fa-2x mb-2"></i></a>
                         <a href="#" class="google-plus"><i class="bi bi-skype p-1 fa-2x mb-2"></i></a>
                         <a href="#" class="linkedin"><i class="bi bi-linkedin p-1 fa-2x mb-2"></i></a>
+                        <a href="https://github.com/phillywhitty/cupid_devils" target="_blank" class="m"><span class="bi-github"></span></a>
                     </div>
 
                 </div>
