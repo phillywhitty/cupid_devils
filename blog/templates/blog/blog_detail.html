@@ -48,26 +48,57 @@
                         </button>
                         {% endif %}
                     </form>
-
-                    <div class="row">
-
-                        <div class="col-lg-6 col-md-12 m-auto">
-
-                            <form method="POST">
-
-                                {% csrf_token %}
-                                {{comment_form | crispy }}
-                                <div class="float-right">
-                                    <button class="btn btn-sm bg-dark text-white rounded-1" type="submit"> Add Comment </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                     {% else %}
                     <span class="text-secondary"><i class="far fa-heart"></i></span>
                     {% endif %}
                     <span class="text-secondary">{{ blog.number_of_likes }}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12 m-auto">
+                    <h3>Comments:</h3>
+                    <div>
+                        {% if blog.comments_set %}
+                        {% for comment in blog.comments_set.all %}
+                        <div class="comments">
+                            <div class="comment">
+                                {{ comment.body | linebreaksbr }}
+                            </div>
+                            <div>
+                                <p class="post-icon mt-1 text-muted">{{ comment.name }} on
+                                    <span>{{ comment.created_on }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>No comments yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% if not user.is_authenticated %}
+                        <p>
+                            To post a comment, <strong><a class="link" href="{% url 'account_login' %}">log in</a></strong> to our site!<br> 
+                            If you do not have an account, please <strong><a class="link" href="{% url 'account_signup' %}">sign up</a></strong> here.
+                        </p>
+                {% endif %}
+                <div class="col-lg-6 col-md-12 m-auto">
+                    {% if user.is_authenticated %}
+                    <h3>Add a Comment:</h3>
+                    <p class="comment">Posting as: {{ user.username }}</p>
+                    <form method="POST">
+                      {% csrf_token %}
+                      {{ comment_form | crispy }}
+                      <div class="float-right">
+                        <button class="btn btn-sm bg-dark text-white rounded-1" type="submit">Add Comment</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
                 </div>
             </div>
 
