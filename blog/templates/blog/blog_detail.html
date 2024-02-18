@@ -58,10 +58,36 @@
                     </span>
                 </div>
             </div>
+            <br> <br>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 ">
+                    {% if not user.is_authenticated %}
+                <p>
+                    To post a comment, <strong><a class="link" href="{% url 'account_login' %}">log in</a></strong> to our
+                    site!<br>
+                    If you do not have an account, please <strong><a class="link" href="{% url 'account_signup' %}">sign
+                            up</a></strong> here.
+                </p>
+                {% endif %}
+                    {% if user.is_authenticated %}
+                    <h3>Add a Comment:</h3>
+                    <hr>
+                    <p class="comment">Posting as: {{ user.username }}</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ comment_form | crispy }}
+                        <div class="float-right">
+                            <button class="btn btn-sm bg-dark text-white rounded-1" type="submit">Add Comment</button>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
 
             <div class="row">
-                <div class="col-lg-6 col-md-12 m-auto">
+                <div class="col-lg-6 col-md-12 ">
                     <h3>Comments:</h3>
+                    <hr>
                     <div>
                         {% if comments %}
                         {% for comment in comments %}
@@ -75,54 +101,60 @@
                                 </p>
                             </div>
                             <div>
-                            {% if comment.blog.author == request.user  %}
+                                {% if comment.blog.author == request.user %}
                                 <div class="col-sm mt-1">
-                                    <a class="btn btn-sm btn-edit"
-                                        href="{% url 'edit_comment' pk=comment.pk %}">Edit</a>
-                                    <a class="btn btn-sm btn-delete"
-                                        href="{% url 'delete_comment' comment.id%}">Delete</a>
+                                    <a class="btn btn-sm btn-edit" href="{% url 'edit_comment' comment.id %}">Edit</a>
+                                    <a href="" data-toggle="modal" data-target="#staticBackdrop"
+                                        class="btn btn-sm btn-delete">Delete</a>
                                 </div>
-                            {% endif %}
+                                <!-- Modal -->
+                                <div class="modal fade mb-auto" id="staticBackdrop" data-backdrop="static"
+                                    data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel"><strong>Are you sure
+                                                        you
+                                                        want to delete your comment?</strong></h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <small>Warning! You can't undo this action.</small>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'delete_comment' comment.id%}""
+                                                class=" btn bg-logo-red rounded-1">
+                                                    Yes</a>
+                                                <a href="{% url 'blog_details' blog_id=blog.id  %}"
+                                                    class=" btn bg-dark text-white rounded-1"> No </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            {% endif %}
                         </div>
-                        {% endfor %}
-                        {% else %}
-                        <p>No comments yet.</p>
-                        {% endif %}
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No comments yet.</p>
+                    {% endif %}
                 </div>
             </div>
-
-            <div class="row">
-                {% if not user.is_authenticated %}
-                        <p>
-                            To post a comment, <strong><a class="link" href="{% url 'account_login' %}">log in</a></strong> to our site!<br> 
-                            If you do not have an account, please <strong><a class="link" href="{% url 'account_signup' %}">sign up</a></strong> here.
-                        </p>
-                {% endif %}
-                <div class="col-lg-6 col-md-12 m-auto">
-                    {% if user.is_authenticated %}
-                    <h3>Add a Comment:</h3>
-                    <p class="comment">Posting as: {{ user.username }}</p>
-                    <form method="POST">
-                      {% csrf_token %}
-                      {{ comment_form | crispy }}
-                      <div class="float-right">
-                        <button class="btn btn-sm bg-dark text-white rounded-1" type="submit">Add Comment</button>
-                    </div>
-                </form>
-            </div>
-            {% endif %}
-                </div>
-            </div>
-
-            <div class="text-center">
-                <a href="{% url 'blog_list' %}" class="btn btn-lg bg-primary text-white"> View other stories</a>
-
-            </div>
-
         </div>
     </div>
+
+    <div class="text-center">
+        <a href="{% url 'blog_list' %}" class="btn btn-lg bg-primary text-white"> View other stories</a>
+
+    </div>
+
+</div>
+</div>
 
 </div>
 
