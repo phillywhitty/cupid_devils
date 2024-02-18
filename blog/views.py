@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from . forms import BlogForm
+from . forms import BlogForm, CommentForm
 from . models import Blog, Comment
 
 
@@ -23,6 +23,29 @@ def post_blog(request):
         'form': form
     }
     return render(request, 'blog/blog.html', context)
+
+
+def post_comment(request, blog_id):
+    """ This function renders the comment form"""
+
+    blog = get_object_or_404(Blog, pk=blog_id)
+    blog_comment = None
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            blog_comment = form.save(commit=False)
+            form.blog = blog
+            form.user = request.user
+            form.save()
+        return redirect(reverse('blog_details', args=[blog_id]))
+
+    context = {
+        'comment_form': form
+    }
+    return render(request, 'blog/blog_detail.html', context)
 
 
 class BlogList(generic.ListView):

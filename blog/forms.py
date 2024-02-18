@@ -8,6 +8,7 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = '__all__'
+        exclude = ['author', 'likes', 'status',]
 
 
 class CommentForm(forms.ModelForm):
