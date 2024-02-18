@@ -52,10 +52,10 @@
                     <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
                     {% endif %}
                     <span class="text-secondary">{{ blog.number_of_likes }}</span>
-                    {% with comments.count as total_comments %}
+                    <span>
                         <strong class="text-secondary"><i class="fa-regular fa-comment"></i>
-                            {{ total_comments }}</strong>
-                    {% endwith %}
+                            {{ blog.comments.count }}</strong>
+                    </span>
                 </div>
             </div>
 
