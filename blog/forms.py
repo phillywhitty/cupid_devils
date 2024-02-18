@@ -22,3 +22,14 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'body': forms.Textarea(attrs={'placeholder': 'Write a comment here', 'required': False}),
         }
+
+
+class EditForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Comment
+        fields = ('body',)
+        labels = {
+            "body": "Make your changes below and click save",
+        }

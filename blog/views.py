@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.views.generic import DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from . forms import BlogForm, CommentForm
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.urls import reverse_lazy
+from . forms import BlogForm, CommentForm, EditForm
 from . models import Blog, Comment
 
 
@@ -108,3 +111,47 @@ class BlogLike(LoginRequiredMixin, View):
             blog.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('blog_details', args=[blog_id]))
+
+
+class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """
+    If user is logged in:
+    Direct user to delete_comment.html template
+    User will be prompted with a message to confirm deletion.
+    """
+
+    model = Comment
+    template_name = "delete_comment.html"
+    success_url = reverse_lazy("blog_list")
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user.username == comment.name
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, 'Your comment has been deleted.')
+        return super(CommentDelete, self).delete(request, *args, **kwargs)
+
+
+class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    If user is logged in:
+    Direct user to update_comment.html template,
+    displaying ReviewForm for that specific review.
+    Post edited info back to the database and return user to blog.
+    """
+    model = Comment
+    form_class = EditForm
+    template_name = "edit_comment.html"
+    success_url = reverse_lazy("blog_list")
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user.username == comment.name
+
+    def form_valid(self, form):
+        """
+        Upon success prompt the user with a success message.
+        """
+        messages.success(self.request, 'Your comment has been edited.')
+        return super(CommentEdit, self).form_valid(form)

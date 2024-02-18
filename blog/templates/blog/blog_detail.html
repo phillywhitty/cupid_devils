@@ -49,9 +49,13 @@
                         {% endif %}
                     </form>
                     {% else %}
-                    <span class="text-secondary"><i class="far fa-heart"></i></span>
+                    <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
                     {% endif %}
                     <span class="text-secondary">{{ blog.number_of_likes }}</span>
+                    {% with comments.count as total_comments %}
+                        <strong class="text-secondary"><i class="fa-regular fa-comment"></i>
+                            {{ total_comments }}</strong>
+                    {% endwith %}
                 </div>
             </div>
 
@@ -59,7 +63,7 @@
                 <div class="col-lg-6 col-md-12 m-auto">
                     <h3>Comments:</h3>
                     <div>
-                        {% if blog.comments_set %}
+                        {% if blog.comments_set_all %}
                         {% for comment in blog.comments_set.all %}
                         <div class="comments">
                             <div class="comment">
@@ -70,6 +74,16 @@
                                     <span>{{ comment.created_on }}</span>
                                 </p>
                             </div>
+                            <div>
+                                {% if comment.name == request.user.username %}
+                                    <div class="col-sm mt-1">
+                                        <a class="btn btn-sm btn-edit"
+                                            href="{% url 'edit_comment' blog_id=blog.id comment.pk %}">Edit</a>
+                                        <a class="btn btn-sm btn-delete"
+                                            href="{% url 'delete_comment' blog_id=blog.id comment.pk %}">Delete</a>
+                                    </div>
+                                {% endif %}
+                                </div>
                         </div>
                         {% endfor %}
                         {% else %}
