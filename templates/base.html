@@ -25,6 +25,7 @@
     <!-- Template Main CSS Files -->
     <link href="{% static 'css/variables.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/95bc93f676.js" crossorigin="anonymous"></script>
@@ -76,7 +77,28 @@
 
         </div>
 
-    </header><!-- End Header -->
+    </header>
+    <!-- End Header -->
+    {% for message in messages %}
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+            <p class="text-center text-white alert" style="background-color: palevioletred;" id="message-timer">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
+            </p>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+
+            <p class="text-center text-white alert alert-danger" id="message-timer">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+
+            <p class="text-center text-white alert alert-info" id="message-timer">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
+            </p>
+            
+        {% endif %}
+
+    {% endfor %}
 
     {% block content %}
 
