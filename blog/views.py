@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . forms import BlogForm, CommentForm
 from . models import Blog, Comment
@@ -28,24 +29,29 @@ def post_blog(request):
 def post_comment(request, blog_id):
     """ This function renders the comment form"""
 
-    blog = get_object_or_404(Blog, pk=blog_id)
-    blog_comment = None
-    form = CommentForm()
+    queryset = Blog.objects.filter(status=1)
+    blog = get_object_or_404(queryset, pk=blog_id)
+    comments = blog.comments.filter(approved=True).order_by("-created_on")
 
     if request.method == 'POST':
-        form = CommentForm(request.POST)
-
-        if form.is_valid():
-            blog_comment = form.save(commit=False)
-            form.blog = blog
-            form.user = request.user
-            form.save()
-        return redirect(reverse('blog_details', args=[blog_id]))
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.blog = blog
+            comment.save()
+            messages.success(request, 'Your comment has been uploaded for approval.')
+            return redirect(reverse('blog_details', args=[blog_id]))
+    else:
+        comment_form = CommentForm()
 
     context = {
-        'comment_form': form
+        "blog": blog,
+        "comments": comments,
+        "commented": True,
+        "comment_form": comment_form
     }
-    return render(request, 'blog/blog_detail.html', context)
+
+    return render(request, "blog/blog_detail.html", context)
 
 
 class BlogList(generic.ListView):
