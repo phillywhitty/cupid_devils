@@ -2,11 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.views.generic import DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.urls import reverse_lazy
-from . forms import BlogForm, CommentForm, EditForm
+from . forms import BlogForm, CommentForm
 from . models import Blog, Comment
 
 
@@ -21,8 +18,12 @@ def post_blog(request):
 
         if form.is_valid():
             form.save()
-        return redirect(reverse('blog_list'))
-  
+            messages.success(request, "Blog posted successfully, waiting for approval")
+            return redirect(reverse('blog_list'))
+        else:
+            messages.error(request, "An error occured! Please check your form is valid.")
+    else:
+        form = BlogForm()
     context = {
         'form': form
     }
@@ -44,6 +45,8 @@ def post_comment(request, blog_id):
             comment.save()
             messages.success(request, 'Your comment has been uploaded for approval.')
             return redirect(reverse('blog_details', args=[blog_id]))
+        else:
+            messages.error(request, "An error occured! Please check your form is valid.")
     else:
         comment_form = CommentForm()
 
@@ -120,7 +123,10 @@ def edit_comment(request, comment_id):
         form = CommentForm(request.POST, request.FILES, instance=comment)
         if form.is_valid():
             form.save()
+            messages.success(request, "Edit comment successfully.")
             return redirect(reverse('blog_list'))
+        else:
+            messages.error(request, "An error occured! Please check your form is valid.")
 
     else:
         form = CommentForm(instance=comment)
@@ -133,4 +139,5 @@ def edit_comment(request, comment_id):
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
+    messages.success(request, "Comment deleted successfully")
     return redirect(reverse('blog_list'))
