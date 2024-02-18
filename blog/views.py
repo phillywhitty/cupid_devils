@@ -113,32 +113,24 @@ class BlogLike(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse('blog_details', args=[blog_id]))
 
 
+def edit_comment(request, comment_id):
+
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('blog_list'))
+
+    else:
+        form = CommentForm(instance=comment)
+    context = {
+        'form': form,
+    }
+    return render(request, 'blog/edit_comment.html', context)
+
 
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
     return redirect(reverse('blog_list'))
-
-
-class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    """
-    If user is logged in:
-    Direct user to update_comment.html template,
-    displaying ReviewForm for that specific review.
-    Post edited info back to the database and return user to blog.
-    """
-    model = Comment
-    form_class = EditForm
-    template_name = "edit_comment.html"
-    success_url = reverse_lazy("blog_list")
-
-    def test_func(self):
-        comment = self.get_object()
-        return self.request.user.username == comment.name
-
-    def form_valid(self, form):
-        """
-        Upon success prompt the user with a success message.
-        """
-        messages.success(self.request, 'Your comment has been edited.')
-        return super(CommentEdit, self).form_valid(form)
