@@ -113,24 +113,11 @@ class BlogLike(LoginRequiredMixin, View):
         return HttpResponseRedirect(reverse('blog_details', args=[blog_id]))
 
 
-class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    """
-    If user is logged in:
-    Direct user to delete_comment.html template
-    User will be prompted with a message to confirm deletion.
-    """
 
-    model = Comment
-    template_name = "delete_comment.html"
-    success_url = reverse_lazy("blog_list")
-
-    def test_func(self):
-        comment = self.get_object()
-        return self.request.user.username == comment.name
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(request, 'Your comment has been deleted.')
-        return super(CommentDelete, self).delete(request, *args, **kwargs)
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return redirect(reverse('blog_list'))
 
 
 class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

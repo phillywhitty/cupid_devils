@@ -52,10 +52,10 @@
                     <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
                     {% endif %}
                     <span class="text-secondary">{{ blog.number_of_likes }}</span>
-                    {% with comments.count as total_comments %}
+                    <span>
                         <strong class="text-secondary"><i class="fa-regular fa-comment"></i>
-                            {{ total_comments }}</strong>
-                    {% endwith %}
+                            {{ blog.comments.count }}</strong>
+                    </span>
                 </div>
             </div>
 
@@ -75,12 +75,12 @@
                                 </p>
                             </div>
                             <div>
-                            {% if comment.name == request.user.username %}
+                            {% if comment.blog.author == request.user  %}
                                 <div class="col-sm mt-1">
                                     <a class="btn btn-sm btn-edit"
                                         href="{% url 'edit_comment' pk=comment.pk %}">Edit</a>
                                     <a class="btn btn-sm btn-delete"
-                                        href="{% url 'delete_comment' pk=comment.pk %}">Delete</a>
+                                        href="{% url 'delete_comment' comment.id%}">Delete</a>
                                 </div>
                             {% endif %}
                             </div>
