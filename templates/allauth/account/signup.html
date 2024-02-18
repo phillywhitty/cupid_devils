@@ -25,7 +25,7 @@
 
             <form class="signup" method="POST" action="{% url 'account_signup' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy}}
                 <button class="btn btn-sm bg-dark text-white rounded-1" type="submit">{% trans "Sign Up" %}</button>
             </form>
         </div>
