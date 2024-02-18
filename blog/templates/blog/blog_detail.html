@@ -40,10 +40,10 @@
                     <form class="d-inline" action="{% url 'blog_like' blog_id=blog.id %}" method="POST">
                         {% csrf_token %}
                         {% if liked %}
-                        <button type="submit" name="blogpost_id" value="{{blog.id}}" class="btn-like">
+                        <button type="submit" name="blogpost_id" value="{{blog.id}}">
                             <i class="fa-solid fa-heart"></i></button>
                         {% else %}
-                        <button type="submit" name="blogpost_id" value="{{blog.id}}" class="btn-like">
+                        <button type="submit" name="blogpost_id" value="{{blog.id}}">
                             <i class="fa-solid fa-heart"></i>
                         </button>
                         {% endif %}
@@ -63,8 +63,8 @@
                 <div class="col-lg-6 col-md-12 m-auto">
                     <h3>Comments:</h3>
                     <div>
-                        {% if blog.comments_set_all %}
-                        {% for comment in blog.comments_set.all %}
+                        {% if comments %}
+                        {% for comment in comments %}
                         <div class="comments">
                             <div class="comment">
                                 {{ comment.body | linebreaksbr }}
@@ -75,15 +75,15 @@
                                 </p>
                             </div>
                             <div>
-                                {% if comment.name == request.user.username %}
-                                    <div class="col-sm mt-1">
-                                        <a class="btn btn-sm btn-edit"
-                                            href="{% url 'edit_comment' blog_id=blog.id comment.pk %}">Edit</a>
-                                        <a class="btn btn-sm btn-delete"
-                                            href="{% url 'delete_comment' blog_id=blog.id comment.pk %}">Delete</a>
-                                    </div>
-                                {% endif %}
+                            {% if comment.name == request.user.username %}
+                                <div class="col-sm mt-1">
+                                    <a class="btn btn-sm btn-edit"
+                                        href="{% url 'edit_comment' pk=comment.pk %}">Edit</a>
+                                    <a class="btn btn-sm btn-delete"
+                                        href="{% url 'delete_comment' pk=comment.pk %}">Delete</a>
                                 </div>
+                            {% endif %}
+                            </div>
                         </div>
                         {% endfor %}
                         {% else %}
