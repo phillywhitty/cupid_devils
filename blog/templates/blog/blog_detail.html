@@ -14,7 +14,7 @@
 
             <div class="text-center">
 
-                <h2> <strong> <u>Love Stories</u></strong></h2>
+                <h2 class="mt-4 mb-4"> <strong> <u>Love Stories</u></strong></h2>
                 <small><strong>Feel free to share a love story through our blogs! </strong></small>
 
             </div>
@@ -32,9 +32,9 @@
                     {% endif %}
                     <div class="post-meta"><span class="date"></span> <span class="mx-1"></span>
                         <span>{{blog.created_on}}</span>
+                        <span class="author mb-3 d-block">{{blog.author}}</span>
                     </div>
-                    <h2 class="mb-2"><a href="{% url 'blog_details' blog_id=blog.id  %}" style="color: #DB7093;"></a>>{{blog.title}}</a></h2>
-                    <span class="author mb-3 d-block">{{blog.author}}</span>
+                    <h2 class="mt-4 mb-4"  style="color: #DB7093 !important;"><a href="{% url 'blog_details' blog_id=blog.id  %}"></a>{{blog.title}}</a></h2>
                     <p class="mb-4 d-block"> {{ blog.content | safe }}</p>
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'blog_like' blog_id=blog.id %}" method="POST">
@@ -68,7 +68,7 @@
                         site!<br>
                         If you do not have an account, please <strong><a class="link"
                                 href="{% url 'account_signup' %}">sign
-                                up</a></strong> here.
+                                up</a></strong> here
                     </p>
                     {% endif %}
                     {% if user.is_authenticated %}
