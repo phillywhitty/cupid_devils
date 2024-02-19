@@ -11,6 +11,12 @@ from . models import Blog, Comment
 def post_blog(request):
     """ This function renders the blog form"""
 
+    if not request.user.is_authenticated:
+
+        messages.error(request, 'Sorry, you need to be logged in.')
+
+        return redirect(reverse('account_login'))
+
     form = BlogForm()
 
     if request.method == 'POST':
@@ -99,6 +105,12 @@ class BlogLike(LoginRequiredMixin, View):
 
 def edit_comment(request, comment_id):
 
+    if not request.user.is_authenticated:
+
+        messages.error(request, 'Sorry, you need to be logged in.')
+
+        return redirect(reverse('account_login'))
+
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES, instance=comment)
@@ -118,6 +130,11 @@ def edit_comment(request, comment_id):
 
 
 def delete_comment(request, comment_id):
+    if not request.user.is_authenticated:
+
+        messages.error(request, 'Sorry, you need to be logged in.')
+
+        return redirect(reverse('account_login'))
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
     messages.success(request, "Comment deleted successfully")
