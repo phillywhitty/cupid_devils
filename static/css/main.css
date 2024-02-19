@@ -8,7 +8,7 @@ body {
 
 a,
 ul {
-  color: #fff !important;
+  color: #000000 !important;
   text-decoration: none;
   list-style: none;
   font-weight: 700;
@@ -37,7 +37,7 @@ h6 {
 }
 
 #footer {
-  background-color: #C9CACB !important;
+  background-color: #DBDBDC !important;
   border-top: solid 4px #D87392 !important;
   color: #fff !important;
 }
@@ -162,6 +162,7 @@ section {
   height: 90px;
   transition: all 0.5s;
   z-index: 997;
+  background-color: #e7e7ea;
   border-bottom: 4px solid #DBDBDC;
   box-shadow: rgba(0, 3, 77, 0.15) 0px 3px 8px 0px;
 }
