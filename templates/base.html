@@ -41,48 +41,51 @@
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <a href="{% url 'home' %}" class="logo d-flex align-items-center">
-                <h4 class="text-size-sm">The L<i class="fa-regular fa-heart fa-sm"></i>vers Blog</h4>
+                <h4 class="text-size-sm" style="color:#fff">The L<i class="fa-regular fa-heart fa-sm"></i>vers Blog
+                </h4>
             </a>
             <nav class="navbar navbar-expand-lg navbar-light nav-colour">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon "></span>
-    
+
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    
+
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-    
-                        <li class="nav-item"><a class="mr-3" href="{% url 'blog_list' %}">Love Stories</a></li>
-                                <li class="nav-item">
-                                    <a class="mr-3" href="{% url 'post_blog' %}">Add Love Story</a></li>
-                                
-    
+
+                        <li class="nav-item" style="color:#DBDBDC !important"><a class="mr-3"
+                                href="{% url 'blog_list' %}">Love Stories</a></li>
+                        <li class="nav-item">
+                            <a class="mr-3" href="{% url 'post_blog' %}">Add Love Story</a></li>
+
+
                         {% if user.is_authenticated %}
-    
+
                         <li class="nav-item">
                             <a class="mr-3" href="{% url 'account_logout' %}">Logout</a>
                         </li>
-    
+
                         {% else %}
-    
+
                         <li class="nav-item">
                             <a class="mr-3" href="{% url 'account_signup' %}">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="mr-3" href="{% url 'account_login' %}">Login</a>
                         </li>
-                        
+
                         {% endif %}
                     </ul>
-    
-    
+
+
                 </div>
-    
+
             </nav>
-                                
+
             <!-- .navbar -->
 
         </div>
@@ -91,79 +94,82 @@
     <!-- End Header -->
     {% for message in messages %}
 
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
 
-            <p class="text-center text-white alert" style="background-color: palevioletred;" id="message-timer">
-                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
-            </p>
-        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <p class="text-center text-white alert" style="background-color: palevioletred;" id="message-timer">
+        <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
+    </p>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
 
-            <p class="text-center text-white alert alert-danger" id="message-timer">
-                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
+    <p class="text-center text-white alert alert-danger" id="message-timer">
+        <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
         {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
 
-            <p class="text-center text-white alert alert-info" id="message-timer">
-                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
-            </p>
-            
+        <p class="text-center text-white alert alert-info" id="message-timer">
+            <i class="fa fa-check" aria-hidden="true"></i> &nbsp;{{ message }}
+        </p>
+
         {% endif %}
 
-    {% endfor %}
+        {% endfor %}
 
-    {% block content %}
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
 
-    <!-- ======= Footer ======= -->
-    <footer class="bg-body-tertiary text-center mt-5 text-lg-start" id="footer">
-        <!-- Grid container -->
-        <div class="container p-4">
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">About The Lovers Blog</h5>
+        <!-- ======= Footer ======= -->
+        <footer class="bg-body-tertiary text-center text-lg-start" id="footer">
+            <!-- Grid container -->
+            <div class="container p-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                        <h5 id="footer-heading-text"class="text-uppercase">About The Lovers Blog</h5>
 
-                    <p>
-                        Welcome to The Lovers Blog, where we celebrate the beauty of love and companionship. Dive
-                        into heartwarming stories, insightful advice, and inspiring tales of romance that warm the
-                        soul. Join our community in spreading love and fostering meaningful connections.
-                    </p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Follow Us On Social Media</h5>
-                    <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
-                        <a href="https://github.com/phillywhitty/cupid_devils" target="_blank" class="facebook"><i class=" val-icons bi bi-github p-1 fa-2x mb-2"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank" class="instagram"><i class=" val-icons bi bi-instagram p-1 fa-2x mb-2"></i></a>
-                        <a href="https://gb.linkedin.com/" target="_blank" class="linkedin"><i class="val-icons bi bi-linkedin p-1 fa-2x mb-2"></i></a>
+                        <p id="footer-p-text">
+                            Welcome to The Lovers Blog, where we celebrate the beauty of love and companionship. Dive
+                            into heartwarming stories, insightful advice, and inspiring tales of romance that warm the
+                            soul. Join our community in spreading love and fostering meaningful connections.
+                        </p>
                     </div>
+                    <!--Grid column-->
 
+                    <!--Grid column-->
+                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                        <h5 id="footer-heading-text" class="text-uppercase">Follow Us On Social Media</h5>
+                        <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
+                            <a href="https://github.com/phillywhitty/cupid_devils" target="_blank" class="facebook"><i
+                                    class=" val-icons bi bi-github p-1 fa-2x mb-2"></i></a>
+                            <a href="https://www.instagram.com/" target="_blank" class="instagram"><i
+                                    class=" val-icons bi bi-instagram p-1 fa-2x mb-2"></i></a>
+                            <a href="https://gb.linkedin.com/" target="_blank" class="linkedin"><i
+                                    class="val-icons bi bi-linkedin p-1 fa-2x mb-2"></i></a>
+                        </div>
+
+                    </div>
+                    <!--Grid column-->
                 </div>
-                <!--Grid column-->
+                <!--Grid row-->
             </div>
-            <!--Grid row-->
-        </div>
-        <!-- Grid container -->
+            <!-- Grid container -->
+
+        </footer>
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.07);">
-            © 2024 Copyright:
-            <a class="text-body" href="https://mdbootstrap.com/">CI HackTeam</a>
+        <div id="copyright-section" class="text-center p-3">
+            © 2024 Copyright: Cupid Devils
         </div>
         <!-- Copyright -->
-    </footer>
 
-    <!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap Bundle (includes Popper.js) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        <!-- Bootstrap Bundle (includes Popper.js) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
