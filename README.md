@@ -18,7 +18,7 @@ The lovers Blog is a hackathon project created by the Cupid-Devils. The project 
   - [Andreas Jelenko](#Andreas-Jelenko)
   - [Jamie Connell](#Jamie-Connell)
   - [Daniel Stauffer](#Daniel-Strauffer)
-  - [Mike](#Mike)
+  - [Mike Anning](#Mike)
 
 - [User Experience](#User-Experience)
 - [User Stories](##User-Stories)
