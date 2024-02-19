@@ -30,7 +30,7 @@
                     <a href="{{blog.featured_image.url}}" target="_blank"><img src="{{blog.featured_image.url}}"
                             target="_blank" alt="" class="img-fluid"></a>
                     {% endif %}
-                    <div class="post-meta"><span class="date"></span> <span class="mx-1">&bullet;</span>
+                    <div class="post-meta"><span class="date"></span> <span class="mx-1"></span>
                         <span>{{blog.created_on}}</span>
                     </div>
                     <h2 class="mb-2"><a href="{% url 'blog_details' blog_id=blog.id  %}">{{blog.title}}</a></h2>
@@ -62,13 +62,15 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 ">
                     {% if not user.is_authenticated %}
-                <p>
-                    To post a comment, <strong><a class="link" href="{% url 'account_login' %}">log in</a></strong> to our
-                    site!<br>
-                    If you do not have an account, please <strong><a class="link" href="{% url 'account_signup' %}">sign
-                            up</a></strong> here.
-                </p>
-                {% endif %}
+                    <p>
+                        To post a comment, <strong><a class="link" href="{% url 'account_login' %}">log in</a></strong>
+                        to our
+                        site!<br>
+                        If you do not have an account, please <strong><a class="link"
+                                href="{% url 'account_signup' %}">sign
+                                up</a></strong> here.
+                    </p>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <h3>Add a Comment:</h3>
                     <hr>
@@ -77,7 +79,8 @@
                         {% csrf_token %}
                         {{ comment_form | crispy }}
                         <div class="float-right">
-                            <button class="btn btn-sm val-colour text-white rounded-1" type="submit">Add Comment</button>
+                            <button class="btn btn-sm val-colour text-white rounded-1" type="submit">Add
+                                Comment</button>
                         </div>
                     </form>
                 </div>
@@ -103,9 +106,10 @@
                             <div>
                                 {% if comment.blog.author == request.user %}
                                 <div class="col-sm mt-1">
-                                    <a class="btn btn-sm btn-edit val-colour" href="{% url 'edit_comment' comment.id %}">Edit</a>
-                                    <a href="" class="btn btn-sm btn-edit bg-danger text-white" data-toggle="modal" data-target="#staticBackdrop"
-                                        class="btn btn-sm btn-delete">Delete</a>
+                                    <a class="btn btn-sm btn-edit val-colour"
+                                        href="{% url 'edit_comment' comment.id %}">Edit</a>
+                                    <a href="" class="btn btn-sm btn-edit bg-danger text-white" data-toggle="modal"
+                                        data-target="#staticBackdrop" class="btn btn-sm btn-delete">Delete</a>
                                 </div>
                                 <!-- Modal -->
                                 <div class="modal fade mb-auto" id="staticBackdrop" data-backdrop="static"
@@ -152,9 +156,6 @@
         <a href="{% url 'blog_list' %}" class="btn btn-lg val-colour text-white"> View other stories</a>
 
     </div>
-
-</div>
-</div>
 
 </div>
 
