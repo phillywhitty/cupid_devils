@@ -40,16 +40,16 @@
                         </h2>
                         <span class="author mb-3 d-block">{{blog.author}}</span>
                         <p class="mb-4 d-block">{{blog.excerpt}}</p>
-                        <p class="p-1"><i class="fa-solid fa-heart"></i>{{ blog.number_of_likes}} &nbsp; <i class="fa fa-comment" aria-hidden="true"></i> &nbsp;{{blog.comments.count}}
+                        <p class="p-1"><i class="fa-solid fa-heart"></i>&nbsp;{{ blog.number_of_likes}} &nbsp; <i class="fa fa-comment" aria-hidden="true"></i> &nbsp;{{blog.comments.count}}
                         </p>
-                        <a href="{% url 'blog_details' blog_id=blog.id  %}" class="btn btn-primary">Read More &rarr;</a>
+                        <a href="{% url 'blog_details' blog_id=blog.id  %}" class="btn val-colour text-white">Read More &rarr;</a>
                     </div>
 
                 </div>
                 {% endfor %}
 
                 <div class="text-center">
-                    <a href="{% url 'post_blog' %}" class="btn btn-lg bg-primary p-3 text-white">Share your love story here!</a>
+                    <a href="{% url 'post_blog' %}" class="btn btn-lg val-colour p-3 text-white">Share your love story here!</a>
 
                 </div>
 

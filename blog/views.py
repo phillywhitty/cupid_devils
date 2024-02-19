@@ -83,25 +83,6 @@ def blog_details(request, blog_id):
 
     return render(request, 'blog/blog_detail.html', context)
 
-#class BlogDetail(View):
-#
-#    def get(self, request, slug, *args, **kwargs):
-#        blog = get_object_or_404(Blog, slug=slug)
-#        comments = blog.comments.filter(approved=True).order_by("-created_on")
-#        liked = False
-#        if blog.likes.filter(id=self.request.user.id).exists():
-#            liked = True
-#
-#        return render(
-#            request,
-#            "blog_detail.html",
-#            {
-#                "blog": blog,
-#                "comments": comments,
-#                "liked": liked
-#            },
-#        )
-
 
 class BlogLike(LoginRequiredMixin, View):
 

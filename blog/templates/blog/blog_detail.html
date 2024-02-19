@@ -77,7 +77,7 @@
                         {% csrf_token %}
                         {{ comment_form | crispy }}
                         <div class="float-right">
-                            <button class="btn btn-sm bg-dark text-white rounded-1" type="submit">Add Comment</button>
+                            <button class="btn btn-sm val-colour text-white rounded-1" type="submit">Add Comment</button>
                         </div>
                     </form>
                 </div>
@@ -103,8 +103,8 @@
                             <div>
                                 {% if comment.blog.author == request.user %}
                                 <div class="col-sm mt-1">
-                                    <a class="btn btn-sm btn-edit" href="{% url 'edit_comment' comment.id %}">Edit</a>
-                                    <a href="" data-toggle="modal" data-target="#staticBackdrop"
+                                    <a class="btn btn-sm btn-edit val-colour" href="{% url 'edit_comment' comment.id %}">Edit</a>
+                                    <a href="" class="btn btn-sm btn-edit bg-danger text-white" data-toggle="modal" data-target="#staticBackdrop"
                                         class="btn btn-sm btn-delete">Delete</a>
                                 </div>
                                 <!-- Modal -->
@@ -149,7 +149,7 @@
     </div>
 
     <div class="text-center">
-        <a href="{% url 'blog_list' %}" class="btn btn-lg bg-primary text-white"> View other stories</a>
+        <a href="{% url 'blog_list' %}" class="btn btn-lg val-colour text-white"> View other stories</a>
 
     </div>
 
