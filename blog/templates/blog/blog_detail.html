@@ -33,7 +33,7 @@
                     <div class="post-meta"><span class="date"></span> <span class="mx-1"></span>
                         <span>{{blog.created_on}}</span>
                     </div>
-                    <h2 class="mb-2" style="color: #DB7093;"><a href="{% url 'blog_details' blog_id=blog.id  %}">{{blog.title}}</a></h2>
+                    <h2 class="mb-2"><a href="{% url 'blog_details' blog_id=blog.id  %}" style="color: #DB7093;"></a>>{{blog.title}}</a></h2>
                     <span class="author mb-3 d-block">{{blog.author}}</span>
                     <p class="mb-4 d-block"> {{ blog.content | safe }}</p>
                     {% if user.is_authenticated %}
