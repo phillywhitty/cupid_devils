@@ -61,7 +61,8 @@ The lovers Blog is a hackathon project created by the Cupid-Devils. The project 
   - **Jamie Connell** - Current student with Code Institute
 	  - [LinkedIn](https://www.linkedin.com/in/jamie-connell-995748193/), [GitHub](https://github.com/GreenNinjaBoy)  
   - [Daniel Stauffer]()
-  - [Mike]()
+  - **Mike Anning** - Current student with Code Institute
+          - [LinkedIn](https://www.linkedin.com/in/michael-anning-855742239/), [GitHub](https://github.com/michaelja2983)
 
 # User Experience
 
