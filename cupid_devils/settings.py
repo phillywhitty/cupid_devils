@@ -17,7 +17,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['https://cupid-devils-359ac95227ec.herokuapp.com/']
+ALLOWED_HOSTS = ['https://git.heroku.com/cupid-devils.git']
 
 
 # Application definition
