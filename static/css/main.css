@@ -6,10 +6,12 @@ body {
   color: rgba(var(--color-primary-rgb), 1);
 }
 
-a, ul{
-  color: black !important;
+a,
+ul {
+  color: #fff !important;
   text-decoration: none;
-  list-style:none;
+  list-style: none;
+  font-weight: 700;
 }
 
 a:hover {
@@ -27,7 +29,7 @@ h6 {
 }
 
 .adjust-size {
-  height:10rem !important;
+  height: 10rem !important;
 }
 
 #main {
@@ -35,10 +37,33 @@ h6 {
 }
 
 #footer {
-  clear: both;
-  position: relative;
-  height: 200px;
-  margin-top: -200px;
+  background-color: #C9CACB !important;
+  border-top: solid 4px #D87392 !important;
+  color: #fff !important;
+}
+
+#footer-heading-text {
+  color: #D87392 !important;
+  font-weight: 700 !important;
+  border-top: solid 3px #fff !important;
+  border-bottom: solid 3px #fff !important;
+  border-radius: 2px;
+  padding: 5px;
+  box-shadow: rgba(0, 3, 77, 0.15) 0px 3px 8px 0px;
+
+}
+
+#footer-p-text {
+  font-weight: 700 !important;
+  color: #fff;
+  box-shadow: #e96f92d9 0px 3px 8px 0px;
+  padding: 8px;
+}
+
+#copyright-section {
+  background-color: #e96f92d9 !important;
+  color: #fff !important;
+  font-weight: 400 !important;
 }
 
 .val-colour {
@@ -137,11 +162,25 @@ section {
   height: 90px;
   transition: all 0.5s;
   z-index: 997;
-  background: #f2f2f2;
+  background: #EBC6D4;
+  border-bottom: 4px solid #DBDBDC;
+  box-shadow: rgba(0, 3, 77, 0.15) 0px 3px 8px 0px;
 }
 
 .header.sticked {
   height: 70px;
+}
+
+#home-icons {
+  border-top: 3px solid #DBDBDC;
+  border-bottom: 3px solid #DBDBDC;
+  border-radius: 8px;
+  box-shadow: rgba(0, 3, 77, 0.15) 0px 3px 8px 0px;
+  color: #D87392;
+}
+
+#home-icon-para {
+  color: #777878;
 }
 
 .header .logo img {
@@ -883,6 +922,6 @@ section {
 
 @media screen and (max-width:995px) {
   #hide {
-      display: none;
+    display: none;
   }
 }
