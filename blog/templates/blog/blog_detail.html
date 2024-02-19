@@ -35,7 +35,7 @@
                     </div>
                     <h2 class="mb-2"><a href="{% url 'blog_details' blog_id=blog.id  %}">{{blog.title}}</a></h2>
                     <span class="author mb-3 d-block">{{blog.author}}</span>
-                    <p class="mb-4 d-block"> {{blog.content}}</p>
+                    <p class="mb-4 d-block"> {{ blog.content | safe }}</p>
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'blog_like' blog_id=blog.id %}" method="POST">
                         {% csrf_token %}
