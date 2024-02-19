@@ -1,8 +1,3 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-
 import os
 import dj_database_url
 from pathlib import Path
